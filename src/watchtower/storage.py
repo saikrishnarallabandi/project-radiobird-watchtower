@@ -78,13 +78,11 @@ class Store:
                 """
                 SELECT o.* FROM observations o
                 JOIN (
-                  SELECT asset_id, metric, MAX(observed_at) AS observed_at
+                  SELECT asset_id, source, metric, MAX(id) AS id
                   FROM observations
-                  GROUP BY asset_id, metric
+                  GROUP BY asset_id, source, metric
                 ) latest
-                ON latest.asset_id = o.asset_id
-                 AND latest.metric = o.metric
-                 AND latest.observed_at = o.observed_at
+                ON latest.id = o.id
                 ORDER BY o.asset_id, o.metric
                 """
             ).fetchall()

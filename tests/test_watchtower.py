@@ -46,6 +46,7 @@ class WatchtowerTests(unittest.TestCase):
             store = Store(Path(tmp) / "watchtower.db")
             store.init()
             store.add_observations(observations)
+            store.add_observations(observations)
             latest = store.latest_observations()
             self.assertEqual(len(latest), 3)
 

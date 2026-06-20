@@ -1,0 +1,12 @@
+[Unit]
+Description=Run RadioBird Supply Chain Watchtower hourly
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+RandomizedDelaySec=120
+Unit=radiobird-watchtower.service
+
+[Install]
+WantedBy=timers.target
+

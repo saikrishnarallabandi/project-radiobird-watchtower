@@ -63,6 +63,27 @@ Cron example:
 0 * * * * cd /home2/srallaba/projects/project_radiobird_watchtower && . .venv/bin/activate && watchtower cadence --config config/watchlist.example.json >> data/watchtower.log 2>&1
 ```
 
+## GitHub Issue Checkpoints
+
+The hourly checkpoint runner executes the cadence sweep and posts a concise update to issue #6.
+Every GitHub comment is passed through the local privacy guard with `--surface github`.
+
+Manual forced run:
+
+```bash
+PYTHONPATH=src python scripts/hourly_issue_update.py --force
+```
+
+Install the user timer:
+
+```bash
+mkdir -p ~/.config/systemd/user
+cp systemd/radiobird-watchtower.service ~/.config/systemd/user/
+cp systemd/radiobird-watchtower.timer ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now radiobird-watchtower.timer
+```
+
 ## Legal Boundary
 
 This project is for public/legal data sources only: public weather, AIS/ADS-B

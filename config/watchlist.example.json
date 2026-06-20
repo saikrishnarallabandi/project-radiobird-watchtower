@@ -1,0 +1,40 @@
+{
+  "assets": [
+    {
+      "id": "taiwan_semis_ports",
+      "name": "Taiwan semiconductor export ports",
+      "theme": "semiconductors",
+      "location": "Hsinchu, Taiwan",
+      "tickers": ["TSM", "NVDA", "AMD", "MU"],
+      "metrics": {
+        "vessel_count": {"baseline": 42, "direction": "down"},
+        "cargo_flights": {"baseline": 18, "direction": "down"},
+        "weather_risk": {"baseline": 0, "direction": "up"}
+      }
+    },
+    {
+      "id": "korea_memory_cluster",
+      "name": "Korea memory production/export cluster",
+      "theme": "memory",
+      "location": "Pyeongtaek, South Korea",
+      "tickers": ["MU", "SNDK", "NVDA"],
+      "metrics": {
+        "vessel_count": {"baseline": 37, "direction": "down"},
+        "cargo_flights": {"baseline": 22, "direction": "down"},
+        "weather_risk": {"baseline": 0, "direction": "up"}
+      }
+    },
+    {
+      "id": "us_gulf_lng",
+      "name": "US Gulf LNG/export corridor",
+      "theme": "energy",
+      "location": "Houston, Texas",
+      "tickers": ["LNG", "XOM", "CVX", "UNG"],
+      "metrics": {
+        "tanker_count": {"baseline": 25, "direction": "down"},
+        "port_congestion": {"baseline": 4, "direction": "up"},
+        "weather_risk": {"baseline": 0, "direction": "up"}
+      }
+    }
+  ]
+}

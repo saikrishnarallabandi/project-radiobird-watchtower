@@ -1,0 +1,29 @@
+[
+  {
+    "asset_id": "taiwan_semis_ports",
+    "source": "fixture_ais",
+    "metric": "vessel_count",
+    "value": 31,
+    "unit": "vessels",
+    "observed_at": "2026-06-20T03:00:00Z",
+    "metadata": {"note": "Demo AIS-style vessel count below baseline"}
+  },
+  {
+    "asset_id": "korea_memory_cluster",
+    "source": "fixture_adsb",
+    "metric": "cargo_flights",
+    "value": 14,
+    "unit": "flights",
+    "observed_at": "2026-06-20T03:00:00Z",
+    "metadata": {"note": "Demo ADS-B-style cargo frequency drop"}
+  },
+  {
+    "asset_id": "us_gulf_lng",
+    "source": "fixture_ais",
+    "metric": "port_congestion",
+    "value": 9,
+    "unit": "index",
+    "observed_at": "2026-06-20T03:00:00Z",
+    "metadata": {"note": "Demo congestion spike"}
+  }
+]

@@ -40,6 +40,8 @@ class Store:
         self.path = Path(path)
 
     def connect(self) -> sqlite3.Connection:
+        if self.path != Path(":memory:"):
+            self.path.parent.mkdir(parents=True, exist_ok=True)
         con = sqlite3.connect(self.path)
         con.row_factory = sqlite3.Row
         return con

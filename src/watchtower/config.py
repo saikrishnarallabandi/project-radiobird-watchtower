@@ -22,6 +22,11 @@ def load_assets(path: str | Path) -> list[Asset]:
                 location=item["location"],
                 tickers=list(item.get("tickers", [])),
                 metrics=metrics,
+                latitude=item.get("latitude"),
+                longitude=item.get("longitude"),
+                bbox=dict(item.get("bbox", {})),
+                cadence_minutes=int(item.get("cadence_minutes", 60)),
+                providers=dict(item.get("providers", {})),
             )
         )
     return assets

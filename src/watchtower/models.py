@@ -23,6 +23,11 @@ class Asset:
     location: str
     tickers: list[str]
     metrics: dict[str, MetricRule]
+    latitude: float | None = None
+    longitude: float | None = None
+    bbox: dict[str, float] = field(default_factory=dict)
+    cadence_minutes: int = 60
+    providers: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)

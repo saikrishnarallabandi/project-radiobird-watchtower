@@ -80,6 +80,9 @@ class WatchtowerTests(unittest.TestCase):
         self.assertNotIn(assets[0], due)
         self.assertIn(assets[1], due)
 
+        almost_due = {assets[0].id: (now - timedelta(minutes=59)).isoformat().replace("+00:00", "Z")}
+        self.assertIn(assets[0], due_assets([assets[0]], almost_due, now=now))
+
         updated = mark_checked(due, state, now=now)
         self.assertEqual(updated[assets[1].id], "2026-06-20T00:00:00Z")
 

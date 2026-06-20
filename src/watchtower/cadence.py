@@ -24,7 +24,14 @@ def save_state(path: str | Path, state: dict[str, str]) -> None:
     state_path.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n")
 
 
-def due_assets(assets: list[Asset], state: dict[str, str], *, now: datetime | None = None, force: bool = False) -> list[Asset]:
+def due_assets(
+    assets: list[Asset],
+    state: dict[str, str],
+    *,
+    now: datetime | None = None,
+    force: bool = False,
+    grace_minutes: float = 2.0,
+) -> list[Asset]:
     if force:
         return assets
     now = now or utc_now()
@@ -36,7 +43,7 @@ def due_assets(assets: list[Asset], state: dict[str, str], *, now: datetime | No
             continue
         last = datetime.fromisoformat(last_raw.replace("Z", "+00:00"))
         elapsed_minutes = (now - last).total_seconds() / 60
-        if elapsed_minutes >= asset.cadence_minutes:
+        if elapsed_minutes + grace_minutes >= asset.cadence_minutes:
             due.append(asset)
     return due
 

@@ -3,7 +3,8 @@ Description=RadioBird Supply Chain Watchtower hourly checkpoint
 
 [Service]
 Type=oneshot
-WorkingDirectory=/home2/srallaba/projects/project_radiobird_watchtower
+WorkingDirectory=/path/to/project_radiobird_watchtower
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/usr/bin/python3 /home2/srallaba/projects/project_radiobird_watchtower/scripts/hourly_issue_update.py
+Environment=WATCHTOWER_PRIVACY_GUARD=/path/to/privacy_guard.py
+ExecStart=/usr/bin/python3 /path/to/project_radiobird_watchtower/scripts/hourly_issue_update.py
 

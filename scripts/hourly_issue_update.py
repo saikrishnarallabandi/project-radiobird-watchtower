@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REPO = "saikrishnarallabandi/project-radiobird-watchtower"
 DEFAULT_ISSUE = "6"
-PRIVACY_GUARD = Path("/home2/srallaba/projects/project_judithmemory/privacy_guard/privacy_guard.py")
+PRIVACY_GUARD_ENV = "WATCHTOWER_PRIVACY_GUARD"
 
 
 def run(cmd: list[str], *, input_text: str | None = None, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -33,9 +33,13 @@ def truncate(text: str, limit: int = 3500) -> str:
 
 
 def clean_for_github(message: str) -> str:
-    if not PRIVACY_GUARD.exists():
-        raise FileNotFoundError(f"privacy guard missing: {PRIVACY_GUARD}")
-    result = run([sys.executable, str(PRIVACY_GUARD), "--surface", "github"], input_text=message)
+    guard_path = os.environ.get(PRIVACY_GUARD_ENV)
+    if not guard_path:
+        raise RuntimeError(f"{PRIVACY_GUARD_ENV} must point to a local privacy guard before posting to GitHub")
+    privacy_guard = Path(guard_path).expanduser()
+    if not privacy_guard.exists():
+        raise FileNotFoundError(f"privacy guard missing at configured path: {PRIVACY_GUARD_ENV}")
+    result = run([sys.executable, str(privacy_guard), "--surface", "github"], input_text=message)
     cleaned = result.stdout.strip()
     return cleaned or message
 

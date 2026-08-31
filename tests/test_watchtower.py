@@ -5,6 +5,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
@@ -12,6 +13,15 @@ from watchtower.cadence import due_assets, mark_checked
 from watchtower.config import load_assets
 from watchtower.ingestors import FixtureIngestor, NoaaWeatherIngestor, OpenSkyAdsbIngestor
 from watchtower.storage import Store
+
+import importlib.util
+
+hourly_issue_update_path = Path(__file__).resolve().parents[1] / "scripts" / "hourly_issue_update.py"
+hourly_issue_update_spec = importlib.util.spec_from_file_location("hourly_issue_update", hourly_issue_update_path)
+assert hourly_issue_update_spec is not None
+hourly_issue_update = importlib.util.module_from_spec(hourly_issue_update_spec)
+assert hourly_issue_update_spec.loader is not None
+hourly_issue_update_spec.loader.exec_module(hourly_issue_update)
 
 
 class FakeResponse:
@@ -85,6 +95,11 @@ class WatchtowerTests(unittest.TestCase):
 
         updated = mark_checked(due, state, now=now)
         self.assertEqual(updated[assets[1].id], "2026-06-20T00:00:00Z")
+
+    def test_github_comment_privacy_guard_is_required(self):
+        with mock.patch.dict("os.environ", {}, clear=True):
+            with self.assertRaisesRegex(RuntimeError, "WATCHTOWER_PRIVACY_GUARD"):
+                hourly_issue_update.clean_for_github("public checkpoint")
 
 
 if __name__ == "__main__":

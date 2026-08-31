@@ -92,7 +92,7 @@ watchtower cadence --config config/watchlist.example.json --force
 Cron example:
 
 ```cron
-0 * * * * cd /home2/srallaba/projects/project_radiobird_watchtower && . .venv/bin/activate && watchtower cadence --config config/watchlist.example.json >> data/watchtower.log 2>&1
+0 * * * * cd /path/to/project_radiobird_watchtower && . .venv/bin/activate && watchtower cadence --config config/watchlist.example.json >> data/watchtower.log 2>&1
 ```
 
 ## GitHub Issue Checkpoints

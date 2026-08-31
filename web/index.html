@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RadioBird Watchtower Globe</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="globe-panel" aria-label="Rotating neocloud and data-center watchtower globe">
+        <canvas id="globe" width="960" height="960"></canvas>
+        <div class="legend" aria-label="Marker legend">
+          <span><i class="status high"></i> High attention</span>
+          <span><i class="status watch"></i> Watch</span>
+          <span><i class="status stable"></i> Baseline</span>
+        </div>
+      </section>
+
+      <aside class="intel-panel">
+        <div>
+          <p class="eyebrow">RadioBird Watchtower</p>
+          <h1>Neocloud Physical Progress Monitor</h1>
+          <p class="summary">
+            Public-signal view of representative AI infrastructure campuses, grid exposure,
+            and construction evidence across the global watchlist.
+          </p>
+        </div>
+
+        <div class="metrics" aria-label="Watchtower summary metrics">
+          <div>
+            <strong id="site-count">0</strong>
+            <span>Tracked sites</span>
+          </div>
+          <div>
+            <strong id="capacity-count">0</strong>
+            <span>Indicative MW/GW</span>
+          </div>
+          <div>
+            <strong id="alert-count">0</strong>
+            <span>High attention</span>
+          </div>
+        </div>
+
+        <section class="selected-site" aria-live="polite">
+          <p class="eyebrow">Selected Site</p>
+          <h2 id="site-name">Loading...</h2>
+          <dl>
+            <div>
+              <dt>Location</dt>
+              <dd id="site-location"></dd>
+            </div>
+            <div>
+              <dt>Operator</dt>
+              <dd id="site-operator"></dd>
+            </div>
+            <div>
+              <dt>Stage</dt>
+              <dd id="site-stage"></dd>
+            </div>
+            <div>
+              <dt>Signal</dt>
+              <dd id="site-signal"></dd>
+            </div>
+          </dl>
+        </section>
+
+        <section>
+          <div class="list-header">
+            <p class="eyebrow">Hotspots</p>
+            <button id="rotation-toggle" type="button">Pause</button>
+          </div>
+          <div id="site-list" class="site-list"></div>
+        </section>
+      </aside>
+    </main>
+
+    <script src="globe.js"></script>
+  </body>
+</html>
